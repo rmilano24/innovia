@@ -1,0 +1,161 @@
+<div class="digestion-detail">
+	<section class="product-detail digestion-micro-section">
+		<div class="container">    
+			<div class="product-detail-heading text-center">
+				{% if settings.benefit_section_title != "" %}
+				<h1>{{ settings.benefit_section_title }}</h1>
+				{% endif; %}
+				{% if settings.benefit_section_tagline != "" %}
+				<p>{{ settings.benefit_section_tagline }}<p>
+					{% endif; %}
+				</div>
+				<div class="first-section-benifit-inside">    
+					<div class="row digestion-micro-first-section">  
+						<div class="benifit-section-image-mobile hide">
+							{% if settings.benefit_section_img != "" %}
+							<img src="{{ settings.benefit_section_img | img_url: '800x' }}" alt="{{ settings.benefit_section_img.alt }}" />
+							{% endif; %}
+						</div> 
+						<div class="col col-sm-6 col-xs-12">          
+							<div class="icon-section-detail">
+								<div class="icon-detail pull-left">
+									{% if settings.first_benefit_svg_img != "" %}
+									{{ settings.first_benefit_svg_img }}
+									{% endif; %}
+								</div>
+								<div class="detail-of-icon"> 
+									{% if settings.first_benefit_title != "" %}
+									<h4>{{ settings.first_benefit_title }}</h4>
+									{% endif; %}
+									{% if settings.first_benefit_content != "" %}
+									<p>{{ settings.first_benefit_content }}</p>
+									{% endif; %}
+								</div>
+							</div>
+							<div class="icon-section-detail">
+								<div class="icon-detail pull-left">
+									{% if settings.second_benefit_svg_img != "" %}
+									{{ settings.second_benefit_svg_img }}
+									{% endif; %}
+								</div>
+								<div class="detail-of-icon"> 
+									{% if settings.second_benefit_title != "" %}
+									<h4 class="Aloe-heading">{{ settings.second_benefit_title }}</h4>
+									{% endif; %}
+									{% if settings.second_benefit_content != "" %}
+									<p class="Aloe-paragraph">{{ settings.second_benefit_content }}</p>
+									{% endif; %}
+								</div>
+							</div>
+							<div class="icon-section-detail">
+								<div class="icon-detail pull-left curmcumin-image">
+									{% if settings.third_benefit_svg_img != "" %}
+									{{ settings.third_benefit_svg_img }}
+									{% endif; %}
+								</div>
+								<div class="detail-of-icon"> 
+									{% if settings.third_benefit_title != "" %}
+									<h4 class="Curmcumin">{{ settings.third_benefit_title }}</h4>
+									{% endif; %}
+									{% if settings.third_benefit_content != "" %}
+									<p class="curmcum-paragraph">{{ settings.third_benefit_content }}</p>
+									{% endif; %}
+								</div>
+							</div>
+							<div class="icon-section-detail">
+								<div class="icon-detail pull-left vitamin-d3-image">
+									{% if settings.fourth_benefit_svg_img != "" %}
+									{{ settings.fourth_benefit_svg_img }}
+									{% endif; %}
+								</div>
+								<div class="detail-of-icon"> 
+									{% if settings.fourth_benefit_title != "" %}
+									<h4 class="vitamin-d3-heading">{{ settings.fourth_benefit_title }}</h4>
+									{% endif; %}
+									{% if settings.fourth_benefit_content != "" %}
+									<p class="vitamin-d3-paragraph">{{ settings.fourth_benefit_content }}</p>
+									{% endif; %}
+								</div>
+							</div>
+						</div>
+						<div class="col col-sm-6 col-xs-12 benifit-section-image">
+							{% if settings.benefit_section_img != "" %}
+							<img src="{{ settings.benefit_section_img | img_url: '800x' }}" alt="{{ settings.benefit_section_img.alt }}" />
+							{% endif; %}
+							
+						</div>      
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="explore-the-science-of-nector">
+			<div class="explore-wrapper">
+				<div class="row explore-the-science-wrapper">
+					<div class="col col-sm-3 col-xs-12 text-center">
+						{% if settings.explore_section_img != "" %}
+						<img src="{{ settings.explore_section_img | img_url: '800x' }}" alt="{{ settings.explore_section_img.alt }}" />
+						{% endif; %}
+					</div>
+					<div class="col col-sm-9 col-xs-12 micro-tech">
+						{% if settings.explore_section_content != "" %}
+						<p>
+							{{ settings.explore_section_content }}
+						</p>
+						{% endif; %}
+						{% if settings.explore_section_link_url != "" %}
+						<a class="science-of-nectar explore-the-science" href="{{ settings.explore_section_link_url }}">
+							{{ settings.explore_section_link_text }}
+							<span>{{'arrow-next-white.png' |asset_url | img_tag }}</span>
+						</a>
+						{% endif; %}
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="shipping-section-product-detail">
+			<div class="container">
+				<div class="shipping-subscription row">
+					<div class="col img-column">
+						<div class="img-plus-text shipping-img">
+							<div class="shipping-subscription-img">
+								{% if settings.free_shipping_section_img != "" %}
+								<img src="{{ settings.free_shipping_section_img | img_url: '800x' }}" alt="{{ settings.free_shipping_section_img.alt }}" />
+								{% endif; %}
+							</div>
+							<div class="shipping-subscription-img-text">
+								{% if settings.free_shipping_section_content != "" %}
+								<p>{{ settings.free_shipping_section_content }}</p>
+								{% endif; %}
+								{% if settings.free_shipping_section_link_text != "" %}
+								<a class="btn" href="{{ settings.free_shipping_section_link_url }}">{{ settings.free_shipping_section_link_text }}</a>
+								{% endif; %}
+
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="img-plus-text">
+							<div class="shipping-subscription-img">
+								{% if settings.try_it_before_section_img != "" %}
+								<img src="{{ settings.try_it_before_section_img | img_url: '800x' }}" alt="{{ settings.try_it_before_section_img.alt }}" />
+								{% endif; %}
+							</div>
+							<div class="shipping-subscription-img-text">
+								{% if settings.try_it_before_section_content != "" %}
+								{{ settings.try_it_before_section_content }}
+								{% endif; %}
+							</p>
+							{% if settings.try_it_before_section_link_text != "" %}
+							<a class="btn" href="{{ settings.try_it_before_section_link_url }}">{{ settings.try_it_before_section_link_text }}</a>
+							{% endif; %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="product-review">
+		<div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+	</section> 
+	{% include 'faq-intro' %}
+</div>

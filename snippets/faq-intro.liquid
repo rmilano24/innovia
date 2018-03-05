@@ -1,0 +1,91 @@
+  <section class="digestion-micro-shot-faq prod-faq-section">   
+    <div class="container">
+      <div class="faq-section">
+
+        <div class="row section-header text-center">
+         {%comment%} <h1>{{ page.title }}</h1>{%endcomment%}
+
+         <div class="col-sm-12 faq-heading power-pack-faq-heading"><h1 class="frequently-heading">Frequently Asked Questions</h1></div>
+
+       </div>    
+     </div>      
+
+     <div id="accordion" role="tablist">
+       {% if settings.faq_first_title != "" and settings.faq_first_content != "" %}
+       <div class="product-faq-border">
+        <div class="card-header innovia-power-faq" role="tab" id="headingTen">
+          <h5 class="mb-0">
+            <a class="collapsed" data-toggle="collapse" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+              {{ settings.faq_first_title }}
+            </a>
+            <i class="fa fa-plus" aria-hidden="true">{{ 'plus-sign.png' | asset_url | img_tag:'plus-sign'}}</i>
+            <i class="fa fa-minus" aria-hidden="true">{{ 'minus-sign.png' | asset_url | img_tag:'plus-minus'}}</i>
+          </h5>
+        </div>
+        <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen" data-parent="#accordion">
+          <div class="card-body digestion-body-faq">
+            {{ settings.faq_first_content }} 
+          </div>
+        </div>
+      </div>
+      {% endif; %}
+
+
+      {% if settings.faq_second_title != "" and settings.faq_second_content != "" %}
+      <div class=" product-faq-border">
+        <div class="card-header innovia-power-faq" role="tab" id="headingEleven">
+          <h5 class="mb-0">
+            <a class="collapsed" data-toggle="collapse" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+              {{ settings.faq_second_title }}
+            </a>
+            <i class="fa fa-plus" aria-hidden="true">{{ 'plus-sign.png' | asset_url | img_tag:'plus-sign'}}</i>
+            <i class="fa fa-minus" aria-hidden="true">{{ 'minus-sign.png' | asset_url | img_tag:'plus-minus'}}</i>
+          </h5>
+        </div>
+        <div id="collapseEleven" class="collapse" role="tabpanel" aria-labelledby="headingNine" data-parent="#accordion">
+          <div class="card-body digestion-body-faq">
+            {{ settings.faq_second_content }} 
+          </div>
+        </div>
+      </div>
+      {% endif; %}
+
+
+      {% if settings.faq_third_title != "" and settings.faq_third_content != "" %}
+      <div class="product-faq-border">
+        <div class="card-header innovia-power-faq" role="tab" id="headingNine">
+          <h5 class="mb-0">
+            <a class="collapsed" data-toggle="collapse" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+             {{ settings.faq_third_title }}
+           </a>
+           <i class="fa fa-plus" aria-hidden="true">{{ 'plus-sign.png' | asset_url | img_tag:'plus-sign'}}</i>
+           <i class="fa fa-minus" aria-hidden="true">{{ 'minus-sign.png' | asset_url | img_tag:'plus-minus'}}</i>
+         </h5>
+       </div>
+       <div id="collapseNine" class="collapse" role="tabpanel" aria-labelledby="headingNine" data-parent="#accordion">
+        <div class="card-body digestion-body-faq">
+          {{ settings.faq_third_content }} 
+        </div>
+      </div>
+    </div>
+    {% endif; %}
+
+    {% if settings.faq_more_text != "" %}
+    <div  class="col-sm-12 more-faq-question">
+      <p>{{ settings.faq_more_text }}</p>    
+    </div>
+    {% endif; %}
+    {% if settings.faq_more_button_text != "" and settings.faq_more_button_link != "" %}
+    <div class="col-sm-12 all-faq-button">
+      <a href="{{ settings.faq_more_button_link }}" id="AddToCart-product-template" class="btn product-form__cart-submit product-form__cart-submit--small immunity-btn" type="submit" name="add">
+        {{ settings.faq_more_button_text }}
+      </a>
+    </div> 
+    {% endif; %}
+    <div class="rte">
+      {{ page.content }}
+
+    </div>
+  </div>
+</div> 
+</section>

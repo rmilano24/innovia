@@ -1,0 +1,81 @@
+ <div class="section-header inner-page-menu text-center">
+        <a data-id="articles" class="tab active" href="https://innoviaprobiotics.com/pages/blog">Blog</a>	 
+        <a data-id="social" class="tab" href="https://innoviaprobiotics.com/pages/social">Social</a>	 
+        <!--<a data-id="press" class="tab" href="">Press</a>-->	 
+      </div> 
+<div class="container">
+  <div class="stories-page">
+    <div class="inner-stories-container">
+     
+      <div class="rte">
+        <div class="tab-contents" id="articles">
+          <div class="recent-two row">
+            {% for article in blogs.article.articles limit:2 %}
+            <div class="col recent-articles">
+          	   <div class="recent-image">	 
+			     <a href="{{ article.url }}"><img src="{{ article.image.src | img_url: 'master' }}"></a>
+               </div>  
+               <div  class="recent-published_at">
+                 <span class="article__date">
+                      {{ article.published_at | time_tag: format: 'month_day_year' }}
+                 </span>
+               </div>
+			   <div  class="recent-title">
+                    {{ article.title }}
+               </div>
+              <div class="hr line"></div>
+            </div>
+			{% endfor %}
+          </div>
+          <div class="row grid-post my-list">
+            {% assign i = 0 %}
+            {% for article in blogs.article.articles %}                          
+			{% assign i = i | plus: 1 %}           
+              {% if i < 3%}
+               {% continue %}
+             {% else %}
+            <div class="col col-sm-4 my-articles">
+               <div class="aricle-img">	 
+                   <a href="{{ article.url }}"><img src="{{ article.image.src | img_url: 'master' }}"></a>
+               </div>  
+               <div class="recent-published_at">
+                   <span class="article__date">
+                        {{ article.published_at | time_tag: format: 'month_day_year' }}
+                   </span>
+               </div>
+               <div class="post-title">
+                 {{ article.title }}
+               </div>
+              <div class="hr line"></div>
+            </div>
+     		{% endif %}
+			{% endfor %}
+          </div>
+          <div id="loadMore" class="text-center"><a class="btn" href="#">Load more</a></div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">  
+  
+  $(document).on('click','.tab',function(){
+    $('.tab').removeClass('active');
+    $(this).addClass('active');
+    $('.tab-contents').css({display:'none'}); 
+    	var id=$(this).data('id'); 
+    	$('#'+id).css({display:'block'});       
+  });  
+  
+  $(document).ready(function(){  
+    size_li = $(".my-list .my-articles").size();     
+    x=6;
+    $('.my-list .my-articles:lt('+x+')').show();
+    $('#loadMore').click(function () {
+        x= (x+6 <= size_li) ? x+6 : size_li;
+        $('.my-list .my-articles:lt('+x+')').show();
+    });
+ });     
+  
+</script>

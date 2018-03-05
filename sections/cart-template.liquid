@@ -1,0 +1,348 @@
+<div class="page-width" data-section-id="{{ section.id }}" data-section-type="cart-template">
+
+  {% if cart.item_count > 0 %}
+  <div class="section-header text-center">
+    <h1>{{ 'cart.general.title' | t }}</h1>
+  </div>
+
+  <form action="/cart" method="post" novalidate class="cart">
+    <table>
+      <thead class="cart__row cart__header">
+        <th colspan="2">{{ 'cart.label.product' | t }}</th>
+        <th>{{ 'cart.label.price' | t }}</th>
+        <th class="text-center">{{ 'cart.label.quantity' | t }}</th>
+        <th class="text-right">{{ 'cart.label.total' | t }}</th>
+      </thead>
+      <tbody>
+        {% for item in cart.items %}
+
+
+        <tr data-available-variants="" data-choosen-plan="{{ item.properties.subscription_id}}" class="cart__row border-bottom line{{ forloop.index }} cart-flex{% if forloop.first %} border-top{% endif %} {% if item.product.type == 'Trial' %} trial{% endif %}" data-variant-id = '{{ item.variant_id }}' data-product-handle='{{ item.product.handle }}' data-product-id="{{ item.id }}" data-intervalfreq = "months" data-subs_id="81943" data-shipping_interval_unit_type="1" data-autodeliver="autodeliver_{{item.id}}">
+          <td class="cart__image-wrapper cart-flex-item">
+
+            <a href="{{ item.url | within: collections.all }}">
+              <img class="cart__image" src="{{ item | img_url: '95x95', scale: 2 }}" alt="{{ item.title | escape }}">
+            </a>
+          </td>
+          <td class="cart__meta small--text-left cart-flex-item">
+            <div class="list-view-item__title">
+              <a href="{{ item.url }}">
+                {{ item.product.title }}
+                {% if item.quantity > 1 %}
+                <span class="medium-up--hide"><span class="visually-hidden">{{ 'cart.label.quantity' | t }}</span>(x{{ item.quantity }})</span>
+                {% endif %}
+              </a>
+            </div>
+            {% unless item.variant.title contains 'Default' %}
+            <div class="cart__meta-text">
+              {% for option in item.product.options %}
+              {{ option }}: {{ item.variant.options[forloop.index0] }}<br/>
+              {% endfor %}
+            </div>
+            {% endunless %}
+
+                {% comment %}
+                  Optional, loop through custom product line items if available
+
+                  Line item properties come in as having two parts. The first part will be passed with the default form,
+                  but p.last is the actual custom property and may be blank. If it is, don't show it.
+
+                  For more info on line item properties, visit:
+                    - http://docs.shopify.com/support/your-store/products/how-do-I-collect-additional-information-on-the-product-page-Like-for-a-monogram-engraving-or-customization
+                    {% endcomment %}
+                    {%- assign property_size = item.properties | size -%}
+                    {% if property_size > 0 %}
+                    <div class="cart__meta-text">
+                      {% for p in item.properties %}
+                      {% unless p.last == blank or p.first == "subscription_id" or p.first == "shipping_interval_frequency" or p.first == "shipping_interval_unit_type" %}
+                      {{ p.first }}:
+
+                        {% comment %}
+                          Check if there was an uploaded file associated
+                          {% endcomment %}
+                          {% if p.last contains '/uploads/' %}
+                          <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                          {% else %}
+                          {{ p.last }}
+                          {% endif %}
+                          {% endunless %}
+                          {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <p class="small--hide" >
+                          <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn btn--small btn--secondary cart__remove">{{ 'cart.general.remove' | t }}</a>
+                        </p>
+                      </td>
+                      <td class="cart__price-wrapper cart-flex-item">
+
+                        <div class="small--hide">
+                          {{ item.price | money }}
+                        </div>
+
+                        <table class="medium-up--hide mob-cart-items">
+
+                          <tr>
+
+                            <td class="price-mob-cart-items"><strong>Price: </strong></td>
+
+                            <td class="total-price-mob-cart-items"> {{ item.price | money }}</td>
+
+                          </tr>
+                          {% if item.quantity > 1 %}
+                          <tr>
+
+                            <td><strong>Qty: </strong></td>
+
+                            <td>
+                              {% if item.product.type == "Trial" %}
+                              1
+                              {% else %}
+
+                              <div class="update_qty_wrap">
+                            <input size="3" type="number" value="{{ item.quantity }}" name="updated-qty">
+                            <a class="update-qty btn btn--secondary" href="javascript:Void(0)">update</a>
+                          </div>
+                              {% endif %}
+
+                              <input type="hidden" name="return_to" value="/checkout">
+                            </td>
+
+                          </tr>
+
+
+
+
+                          <tr>
+
+                            <td><strong>Total Price: </strong></td>
+
+                            <td class="mob-total-price">
+                              {{ item.line_price | money }}
+                            </td>
+
+                          </tr>
+                          {% endif %}
+
+                        </table>
+
+
+
+
+                        {% for discount in item.discounts %}
+                        <div class="cart-item__discount medium-up--hide">{{ discount.title }}</div>
+                        {% endfor %}
+
+                        <div class="cart__edit medium-up--hide small--hide">
+                          <button type="button" class="btn btn--secondary btn--small js-edit-toggle cart__edit--active" data-target="line{{ forloop.index }}">
+                            <span class="cart__edit-text--edit">{{ 'cart.general.edit' | t }}</span>
+                            <span class="cart__edit-text--cancel">{{ 'cart.general.cancel' | t }}</span>
+                          </button>
+                        </div>
+                      </td>
+                      <td class="cart__update-wrapper cart-flex-item text-right">
+                        <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn btn--small btn--secondary cart__remove medium-up--hide">{{ 'cart.general.remove' | t }}</a>
+                        <div class="cart__qty desktop-cart__qty">
+                          <label for="updates_{{ item.key }}" class="cart__qty-label">{{ 'cart.label.quantity' | t }}</label>
+
+                          {% if item.product.type == "Trial" %}
+                          1
+                          {% else %}
+                          
+
+                          <div class="update_qty_wrap desktop-qty">
+                            <input size="3" type="number" value="{{ item.quantity }}" name="updated-qty">
+                            <a class="update-qty btn btn--secondary" href="javascript:Void(0)">update</a>
+                          </div>
+
+                          {% endif %}
+
+                          {% comment %}<input class="cart__qty-input" type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" {% if product.title == 'Try It Free! Digestion Micro-Shot Sample 2-Pack' %}  max="1" {% endif %} pattern="[0-9]*">{% endcomment %}
+                          <input type="hidden" name="return_to" value="/checkout">
+                        </div>
+
+                        <input type="submit" name="update" class="btn btn--small cart__update medium-up--hide" value="{{ 'cart.general.update' | t }}">
+                      </td>
+                      <td class="text-right small--hide">
+                        {% if item.original_line_price != item.line_price %}
+                        <div class="cart-item__original-price"><s>{{ item.original_line_price | money }}</s></div>
+                        {% endif %}
+
+                        <div>
+                          {{ item.line_price | money }}
+                        </div>
+
+                        {% for discount in item.discounts %}
+                        <div class="cart-item__discount">{{ discount.title }}</div>
+                        {% endfor %}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+                <footer class="cart__footer">
+                  <div class="grid">
+                    {% if section.settings.cart_notes_enable %}
+                    <div class="grid__item medium-up--one-half cart-note">
+                      <label for="CartSpecialInstructions" class="cart-note__label small--text-center">{{ 'cart.general.note' | t }}</label>
+                      <textarea name="note" id="CartSpecialInstructions" class="cart-note__input">{{ cart.note }}</textarea>
+                    </div>
+                    {% endif %}
+                    <div class="grid__item text-right small--text-center{% if section.settings.cart_notes_enable %} medium-up--one-half{% endif %}">
+                      <div>
+                        <span class="cart__subtotal-title">{{ 'cart.general.subtotal' | t }}</span>
+                        <span class="cart__subtotal">{{ cart.total_price | money }}</span>
+                      </div>
+                      {% if cart.total_discounts > 0 %}
+                      <div class="cart__savings">
+                        {{ 'cart.general.savings' | t }}
+                        <span class="cart__savings-amount">{{ cart.total_discounts | money }}</span>
+                      </div>
+                      {% endif %}
+                      <div class="cart__shipping">{{ 'cart.general.shipping_at_checkout' | t }}</div>
+                      <a href="collections/all" class="btn btn--secondary cart__update cart__continue--large small--hide" >{{ 'cart.general.continue_shopping' | t }}</a>
+                      <input type="submit" name="update" class="btn btn--secondary cart__update cart__update--large small--hide" value="{{ 'cart.general.update' | t }}">
+                      <input type="submit" name="checkout" class="btn btn--small-wide" value="{{ 'cart.general.checkout' | t }}">
+                      {% if additional_checkout_buttons %}
+                      <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </footer>
+              </form>
+              {% else %}
+              <div class="empty-page-content text-center">
+                <h1>{{ 'cart.general.title' | t }}</h1>
+                <p class="cart--empty-message">{{ 'cart.general.empty' | t }}</p>
+                <div class="cookie-message">
+                  <p>{{ 'cart.general.cookies_required' | t }}</p>
+                </div>
+                <a href="/" class="btn btn--has-icon-after cart__continue-btn">{{ 'general.404.link' | t }}{% include 'icon-arrow-right' %}</a>
+              </div>
+              {% endif %}
+            </div>
+            <script type="text/javascript">
+              $('.cart__qty-input').prop('disabled', true);
+              if ($('tr.trial').length > 0) {
+                var variant_id = $('tr.trial').data('variant-id');
+                $.post('/cart/change.js', {id: variant_id, quantity: 1});
+                setTimeout(function () {
+                  $.getJSON('/cart.js', function (cartData) {
+                    $('#CartCount span').text(cartData.item_count);
+                  });
+                }, 1000)
+              }
+              $("tr.cart__row").each(function () {
+               var handle = $(this).data("product-handle");
+               var variant_ids = new Array();
+               var $self = $(this);
+               jQuery.getJSON('/products/' + handle + '.js', function (product) {
+                 if ($self.data("choosen-plan") == "")
+                 {
+                   for (i = 0; i < 3; i++) {
+                     variant_ids.push(product.variants[i].id);
+                   }
+                 } else
+                 {
+                   for (i = 3; i < 6; i++) {
+                     variant_ids.push(product.variants[i].id);
+                   }
+                 }
+                 $self.attr("data-available-variants", variant_ids);
+               });
+             });
+              function pushToAry(name, val) {
+               var obj = {};
+               obj[name] = val;
+               dataObj.push(obj);
+             }
+             $(".update-qty").on("click", function (e) {
+              var prop = {};
+               e.preventDefault();
+               var dataObj = "";
+               var variant_id = $(this).parents(".cart__row").data("variant-id");
+               var $self = $(this);
+               var qty = parseInt($self.parents(".update_qty_wrap").find("input").val());
+               var index = 0;
+               var plan = $self.parents(".cart__row").data("choosen-plan");
+               var variant_ids = $self.parents(".cart__row").data("available-variants").split(",");
+               var intervalfreq = $self.parents(".cart__row").data('intervalfreq');
+                   var subs_id = $self.parents(".cart__row").data('subs_id');
+                   var shipping_interval_unit_type = $self.parents(".cart__row").data('shipping_interval_unit_type');
+                   prop["shipping_interval_frequency"] = intervalfreq;
+                   prop["subscription_id"] = subs_id;
+                   prop["shipping_interval_unit_type"] = shipping_interval_unit_type;
+                   var autodeliver = $self.parents(".cart__row").data('autodeliver');
+               if (plan == "")
+               {
+
+                 if (qty >= 5)
+                 {
+                   index = 2;
+                 } else if (qty < 5 && qty >= 2) {
+                   index = 1;
+                 } else
+                 {
+                   index = 0;
+                 }
+
+                 
+                 dataObj = {
+                   id: variant_ids[index],
+                   quantity: qty,
+                   
+                 };
+               } else
+               {
+
+                if (qty >= 3)
+                 {
+                   index = 2;
+                 } else if (qty == 2) {
+                   index = 1;
+                 } else
+                 {
+                   index = 0;
+                 }
+                 dataObj = {
+                   id: variant_ids[index],
+                   quantity: qty,
+                   properties: prop
+                 };
+                 dataObj[autodeliver] = "autodeliver";
+               }
+               $.ajax({
+                 type: 'POST',
+                 data: {id: variant_id, quantity: 0},
+                 url: '/cart/change.js',
+                 dataType: 'json',
+                 success: function () {
+                   $.ajax({
+                     type: 'POST',
+                     data: dataObj,
+                     url: '/cart/add.js',
+                     dataType: 'json',
+                     success: function () {
+                       window.location.href = '/cart';
+                     }
+                   });
+                 }
+               });
+
+             });
+
+           </script>
+           {% schema %}
+           {
+            "name": "Cart page",
+            "settings": [
+            {
+              "type": "checkbox",
+              "id": "cart_notes_enable",
+              "label": "Enable cart notes",
+              "default": false
+            }
+            ]
+          }
+          {% endschema %}

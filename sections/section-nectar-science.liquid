@@ -1,0 +1,177 @@
+{{ page.content }}
+
+<div class="nector-science">
+  <section class="nector-science-first">
+    <img src="{{ section.settings.banner_img | img_url: '800x' }}" alt="{{ section.settings.banner_img.alt }}" />
+    <div class="banner-text">
+      <h1>{{ section.settings.banner_txt }}</h1>
+      <div id="v-btn">
+        <div class="wistia_embed wistia_async_t3ac9ssraj popover=true popoverContent=html" style="display: inline-block; white-space: nowrap;">
+          <a href="{{ section.settings.banner_button_link }}" class="btn">{{ section.settings.banner_button_text }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="container">
+    <section class="nector-science-second text-center">
+      <h1>{{ section.settings.section_difference_heading }}</h1>
+      <h5>{{ section.settings.section_difference_content }}</h5>
+      <div class="row">
+        {% for block in section.blocks %}
+        <div class="col col-sm-12 col-md-4 patented">
+         <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.image.alt }}" />
+         <h3>{{ block.settings.title }}</h3>
+         <p>{{ block.settings.text }}</p>
+       </div>
+       {% endfor %}
+     </div>
+   </section>
+ </div>
+ <section class="nector-science-third">
+  <div class="container">
+    <div class="inner-wrapper">
+      <h1>{{ section.settings.the_power_of_probiotics_title }}</h1>
+      {{ section.settings.the_power_of_probiotics_content }}
+    </div>
+  </div>
+</section>
+<section class="nector-science-fourth text-center">
+  <div class="container">
+    <h1>{{ section.settings.section_strain_title }}</h1>
+    <div class="row">
+      <div class="mx-auto col-sm-6  text-center digestion-strains">
+        <img class="strain-img" src="{{ section.settings.section_strain_img | img_url: '800x' }}" alt="{{ section.settings.section_strain_img.alt }}" />
+        <h4>{{ section.settings.section_strain_subtitle }}</h4>
+        <p>{{ section.settings.section_strain_content }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<script src="https://fast.wistia.com/embed/medias/t3ac9ssraj.jsonp" async=""></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async=""></script>
+{% schema %}
+{
+  "name": "Necter Science",
+  "settings": [
+  {
+    "type": "image_picker",
+    "id": "banner_img",
+    "label": "Banner image"
+  },
+  {
+   "type":      "textarea",
+   "id":        "banner_txt",
+   "label":     "Banner Text",
+   "default":   "value",
+   "info":      "Text",
+   "placeholder": "Text"
+ },
+ {
+   "type":      "text",
+   "id":        "banner_button_text",
+   "label":     "Banner Button Text",
+   "placeholder": "Text"
+ },
+ {
+  "type":  "url",
+  "id":    "banner_button_link",
+  "label": "Banner Button link"
+},
+{
+ "type":      "text",
+ "id":        "the_power_of_probiotics_title",
+ "label":     "The Power of Probiotics Title",
+ "default":   "value",
+ "info":      "Text",
+ "placeholder": "Text"
+},
+{
+ "type": "html",
+ "id": "the_power_of_probiotics_content",
+ "label": "The Power of Probiotics Content",
+ "default": "<div><p>Some HTML content</p></div>"
+},
+{
+ "type":      "text",
+ "id":        "section_strain_title",
+ "label":     "Section strain Title"
+},
+{
+  "type": "image_picker",
+  "id": "section_strain_img",
+  "label": "section strain image"
+},
+{
+ "type":      "text",
+ "id":        "section_strain_subtitle",
+ "label":     "Section strain Subtitle"
+},
+{
+ "type": "html",
+ "id": "section_strain_content",
+ "label": "Section strain Content",
+ "default": "<div><p>Some HTML content</p></div>"
+},
+{
+ "type":      "text",
+ "id":        "section_difference_heading",
+ "label":     "Section difference Heading",
+ "default":   "Enter Text here",
+ "info":      "Text",
+ "placeholder": "Text"
+},
+{
+ "type": "html",
+ "id": "section_difference_content",
+ "label": "Section difference Content",
+ "default": "<p>Enter Text here</p>"
+}
+],
+"blocks": [
+{
+  "type": "select",
+  "name": "Add Diifference Level",
+  "settings": [
+  {
+    "type": "image_picker",
+    "id": "image",
+    "label": "Image"
+  },
+  {
+    "type": "text",
+    "id": "title",
+    "label": "Heading",
+    "default": "<p>Enter Title here</p>"
+  },
+  {
+    "type": "richtext",
+    "id": "text",
+    "label": "Text",
+    "default": "<p>Enter Text here</p>"
+  }
+  ]
+}
+],
+"presets": [
+{
+  "name": "Add Diifference Level",
+  "category": "CTA button",
+  "blocks": [
+  { 
+    "type": "select"
+  },
+  {
+    "type": "select"
+  }
+  ]
+}
+]
+
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

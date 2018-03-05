@@ -1,0 +1,140 @@
+{{ page.content }}
+
+<section class="nectar-about">
+  <div class="banner-text">
+    {{ section.settings.banner_text }}
+  </div>
+  <img src="{{ section.settings.about_banner | img_url: '800x' }}" alt="{{ section.settings.image.alt }}" />
+</section>
+<section class="nectar-about-second text-center">
+  <div class="container">
+    <div class="inner-wrapper">
+      <h1>{{ section.settings.section_two_heading }}</h1>
+      {{ section.settings.section_two_content }}
+      <a class="explore-the-science" href="{{ section.settings.section_two_button_link }}">{{ section.settings.section_two_button_text }} <span><img src="//cdn.shopify.com/s/files/1/2305/5045/t/1/assets/arrow-about.png?8004902488185884052" alt="" /></span></a></div>
+    </div>
+  </section>
+  <section class="nectar-about-third text-center">
+    <div class="container">
+      <div class="nectar-about-third-first">
+        <h1>{{ section.settings.section_three_heading }}</h1>
+        {{ section.settings.section_three_content }}
+      </div>
+      <div class="row">
+        {% for block in section.blocks %}
+        <div class="col-sm-12 col-md-4 img-preview-about">
+          <div class="sprite-icon">
+            <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.image.alt }}" />
+          </div>
+          <h5>{{ block.settings.title }}</h5>
+          {{ block.settings.text }}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% schema %}
+  {
+    "name": "About",
+    "settings": [
+    {
+      "type": "image_picker",
+      "id": "about_banner",
+      "label": "Banner image"
+    },
+    {
+     "type":      "textarea",
+     "id":        "banner_text",
+     "label":     "Banner Text",
+     "default":   "value",
+     "info":      "Text",
+     "placeholder": "Text"
+   },
+   {
+     "type":      "text",
+     "id":        "section_two_heading",
+     "label":     "Section 2 Heading",
+     "default":   "value",
+     "info":      "Text",
+     "placeholder": "Text"
+   },
+   {
+     "type": "html",
+     "id": "section_two_content",
+     "label": "Section 2 Content",
+     "default": "<div><p>Some HTML content</p></div>"
+   },
+   {
+     "type":      "text",
+     "id":        "section_two_button_text",
+     "label":     "Section 2 Button Text",
+     "placeholder": "Text"
+   },
+   {
+    "type":  "url",
+    "id":    "section_two_button_link",
+    "label": "Section 2 button link"
+  },
+  {
+   "type":      "text",
+   "id":        "section_three_heading",
+   "label":     "Section 3 Heading",
+   "default":   "Enter Text here",
+   "info":      "Text",
+   "placeholder": "Text"
+ },
+ {
+   "type": "html",
+   "id": "section_three_content",
+   "label": "Section 3 Content",
+   "default": "<p>Enter Text here</p>"
+ }
+ ],
+ "blocks": [
+ {
+  "type": "select",
+  "name": "Add Core Values",
+  "settings": [
+  {
+    "type": "image_picker",
+    "id": "image",
+    "label": "Image"
+  },
+  {
+    "type": "text",
+    "id": "title",
+    "label": "Heading",
+    "default": "<p>Enter Title here</p>"
+  },
+  {
+    "type": "richtext",
+    "id": "text",
+    "label": "Text",
+    "default": "<p>Enter Text here</p>"
+  }
+  ]
+}
+],
+"presets": [
+{
+  "name": "Add Core Values",
+  "category": "CTA button",
+  "blocks": [
+  { 
+    "type": "select"
+  },
+  {
+    "type": "select"
+  }
+  ]
+}
+]
+
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

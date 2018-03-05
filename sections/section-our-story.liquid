@@ -1,0 +1,68 @@
+<section class="nectar-about-fourth text-center">
+  <div class="container">
+    <h1 class="about-journey">Our Story</h1>
+    {% for block in section.blocks %}
+    <div class="row year-text">
+      <div class="col text-right">
+        <h1>{{ block.settings.enter-year }}</h1>
+      </div>
+      <div class="col text-left ">
+        <h4>{{ block.settings.enter-title }}</h4>
+        <p>{{ block.settings.enter-content }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Our Story Section",
+  
+  "blocks": [
+  {
+    "type": "select",
+    "name": "Add Our Story",
+    "settings": [
+    {
+      "type": "text",
+      "id": "enter-year",
+      "label": "Image",
+      "default": "<p>Enter Year here</p>"
+    },
+    {
+      "type": "text",
+      "id": "enter-title",
+      "label": "Heading",
+      "default": "<p>Enter Title here</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "enter-content",
+      "label": "Text",
+      "default": "<p>Enter Text here</p>"
+    }
+    ]
+  }
+  ],
+  "presets": [
+  {
+    "name": "Add Our Story",
+    "category": "CTA button",
+    "blocks": [
+    { 
+      "type": "select"
+    },
+    {
+      "type": "select"
+    }
+    ]
+  }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

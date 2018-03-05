@@ -1,0 +1,170 @@
+<!doctype html>
+<!--[if IE 9]> <html class="ie9 no-js" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_button }}">
+  <meta name="p:domain_verify" content="2685809e33b244b9b84566bf86bfa3a9"/>
+  
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {% if settings.favicon != blank %}
+  <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {% endif %}
+
+  {% capture seo_title %}
+  {{ page_title }}
+  {% if current_tags %}
+  {%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+  {% endif %}
+  {% if current_page != 1 %}
+  &ndash; {{ 'general.meta.page' | t: page: current_page }}
+  {% endif %}
+  {% unless page_title contains shop.name %}
+  &ndash; {{ shop.name }}
+  {% endunless %}
+  {% endcapture %}
+  <title>{{ seo_title }}</title>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {% include 'social-meta-tags' %}
+
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
+  
+
+  {{ 'main-style2.css' | asset_url | stylesheet_tag }}
+  {{ 'main-style.css' | asset_url | stylesheet_tag }}
+  {{'responsive.css' |asset_url | stylesheet_tag}}
+
+  
+  {{ '//code.jquery.com/jquery-1.12.4.js' | script_tag }}
+  {{ 'custom.js' | script_tag }} 
+
+
+
+
+  {% include 'google-fonts' %}
+
+  <script>
+    var theme = {
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        showMore: {{ 'general.filters.show_more' | t | json }},
+        showLess: {{ 'general.filters.show_less' | t | json }},
+        addressError: {{ 'sections.map.address_error' | t | json }},
+        addressNoResults: {{ 'sections.map.address_no_results' | t | json }},
+        addressQueryLimit: {{ 'sections.map.address_query_limit_html' | t | json }},
+        authError: {{ 'sections.map.auth_error_html' | t | json }}
+      },
+      moneyFormat: {{ shop.money_format | json }}
+    }
+
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+  </script>
+  <script src="https://use.typekit.net/wad0ucu.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+	<meta name="google-site-verification" content="GTiijn_l-lXiXVHWvfg3pUgaELim_zYshl7eqoRsRU4" />
+  
+  
+  <script>
+    (function(d) {
+      var config = {
+        kitId: 'wad0ucu',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if(window.location.pathname == '/products') {
+       window.location.href = "https://innoviaprobiotics.com/products/digestion-micro-shot-12-pack";
+     }
+   });
+ </script>
+
+ <!--[if (lte IE 9) ]>{{ 'match-media.min.js' | asset_url | script_tag }}<![endif]-->
+
+ {% if template.directory == 'customers' %}
+ <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script><!--<![endif]-->
+ <!--[if lte IE 9]><script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script><![endif]-->
+ {% endif %}
+
+ <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script><!--<![endif]-->
+ <!--[if lte IE 9]><script src="{{ 'lazysizes.min.js' | asset_url }}"></script><![endif]-->
+
+ <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+ <!--[if lte IE 9]><script src="{{ 'vendor.js' | asset_url }}"></script><![endif]-->
+
+ <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'theme.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+ <!--[if lte IE 9]><script src="{{ 'theme.js' | asset_url }}"></script><![endif]-->
+ <script src="{{ 'custom.js' | asset_url }}"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+
+ {{ content_for_header }}
+</head>
+
+{% comment %}<body class="template-{{ template | split: '.' | first }}  {{ page_title | handleize }} accesskey=">{% endcomment %}
+  <body class="template-{{ template | split: '.' | first }} {% if page_title == 'Custom About' %}about-innovia{% endif %} {{ page_title}}  {{ page_title | handleize }} accesskey=">
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+  <div id="SearchDrawer" class="search-bar drawer drawer--top">
+    <div class="search-bar__table">
+      <div class="search-bar__table-cell search-bar__form-wrapper">
+        <form class="search search-bar__form" action="/search" method="get" role="search">
+          <button class="search-bar__submit search__submit btn--link" type="submit">
+            {% include 'icon-search' %}
+            <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+          </button>
+          <input class="search__input search-bar__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+        </form>
+      </div>
+      <div class="search-bar__table-cell text-right">
+        <button type="button" class="btn--link search-bar__close js-drawer-close">
+          {% include 'icon-close' %}
+          <span class="icon__fallback-text">{{ 'general.search.close' | t }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {% section 'header' %}
+
+  <div class="page-container" id="PageContainer">
+    <main class="main-content" id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+    {% comment %}{% if page.handle  == 'about' %}
+    {% section 'section-our-story' %}
+    {% endif %}{% endcomment %}
+    {% section 'footer' %}
+
+  </div>
+  {% include 'subscription-theme-footer' %}
+  
+  
+  {% unless settings.limit == 'No limit' %}
+  {{ 'jquery.limit.min.js' | asset_url | script_tag }}
+  <script>
+    Shopify.Cart.setProductHandle('{{ product.handle }}');
+    Shopify.Cart.limit( {
+      limitPer: '{{ settings.limit_per }}',
+      limitQuantity: {{ settings.limit_quantity }}{% if settings.limit == 'Enabled for products listed' %},
+      limitProductHandles: jQuery.trim("{{ settings.limit_product_handles }}").split(/[\s,;]+/){% endif %}{% if settings.limit_per == 'cart' and settings.limit_quantity == '1' %},
+      limitSkipCartPage: {% if settings.limit_skip_cart_page %}true{% else %}false{% endif %}{% endif %}
+    } );
+  </script>
+  {% endunless %}   
+  
+</body>
+</html>

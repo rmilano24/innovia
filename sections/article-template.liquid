@@ -1,0 +1,113 @@
+{% assign current_article= article.id %}
+
+<div class="section-header text-center">
+  <div class="title-date-social-icon">
+  {% if section.settings.blog_show_date %}
+    <span class="article__date">
+      {{ article.published_at | time_tag: format: 'month_day_year' }}
+    </span>
+  {% endif %}
+  <h1 class="article__title">{{ article.title }}</h1>
+  {% if section.settings.show_share_buttons %}
+  {% include 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
+  {% endif %}
+  </div>
+  <div class="img-article">
+   {% if section.settings.blog_show_image %}
+  	<img src="{{ article.image.src | img_url: 'master' }}">
+  {% endif %}
+  </div>
+  
+  
+<!--   {% if section.settings.blog_show_author %}
+    <span class="article__author">{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+  {% endif %}   -->
+</div>
+<div class="rte" itemprop="articleBody">
+  <div class="row article-content-wrapper">
+    <div class="col col-sm-12">
+      <div class="article-content-text">
+      {{ article.content }}
+      </div>
+      <div class="recent-articles-post">
+      <label>You May Also Like</label>
+       <div class="row ">
+          
+         {% assign limit = 0 %}
+         
+         {% capture index %}
+         {{ 'now' | date: '%S' | times: blog.articles.size  | divided_by: 60 | minus: 2 }}
+         {% endcapture %}
+         {% assign index = index | plus:0 %}
+         {% if index < 0 or index > 7 %}
+         {% assign index = 4 %}
+         {% endif %}
+          {% for article in blog.articles offset:index %}
+       
+         	{%if current_article != article.id %}	
+             {% if limit < 3 %}
+                <div class="col col-sm-4">
+                      <div class="aricle-img">	 
+                     <a href="{{ article.url }}"><img src="{{ article.image.src | img_url: 'master' }}"></a>
+                       </div>  
+
+                       <div class="post-title">
+                       {{ article.title }}
+                      </div>
+                </div> 
+         {% assign limit = limit | plus:1 %}
+         
+         {%endif%}
+         {%endif%}
+          {% endfor %}
+         
+         
+         
+        </div>
+      
+      
+      </div>
+       
+    
+    </div>
+  </div>
+ 
+</div>
+
+{% schema %}
+  {
+    "name": "Posts",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "blog_show_author",
+        "label": "Show author",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_date",
+        "label": "Show date",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_share_buttons",
+        "label": "Show social sharing buttons",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "article_newsletter_enable",
+        "label": "Show newsletter signup",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_image",
+        "label": "Show Featured Image",
+        "default": true
+      } 
+    ]
+  }
+{% endschema %}

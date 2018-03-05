@@ -1,0 +1,59 @@
+  {{ page.content }}
+  <div class="page-width contact-section faq-contact-section">
+    <div class="grid">
+        <div class="grid__item grid-padding medium-up--five-sixths medium-up--push-one-twelfth contact-section-form ">
+            <div class="row section-header text-center">
+                <div class="col-sm-12 question-heading"> <h1 class="faq-contact-heading">Have A Question That We Haven’t Answered?</h1></div>
+                <div class="col-sm-12 paragraph">  <p class="faq-contact-paragraph">Submit a request and our Innovia Nectar experts will respond within 24 hours. For time sensitive issues, please contact us at (855) 527-2366 Monday thru Friday between 9AM and 7PM EST. </p></div>     
+            </div>
+            {% if page.content.size > 0 %}
+            <div class="rte">
+                <div id="enap-faq-"></div>
+                <script src="https://enormapps.com/faq/embed.js" data-id=""></script>
+            </div>
+            {% endif %}
+            <div class="page-contact-form form-vertical">
+                {% form 'contact' %}
+                {% if form.posted_successfully? %}
+                <p class="note form-success">
+                    {{ 'contact.form.post_success' | t }}
+                </p>
+                {% endif %}
+                {{ form.errors | default_errors }}        
+                <div class="grid grid--half-gutters">
+                    <div class="grid__item medium-up--one-half">
+                        <label for="ContactFormName">{{ 'contact.form.name' | t }}</label>
+                        <input type="text" id="ContactFormName"  name="contact[name]" placeholder="First and Last Name" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+                    </div>
+                    <div class="grid__item medium-up--one-half">
+                        <label for="ContactFormEmail" class="{% if form.errors contains 'email' %}label--error{% endif %}">{{ 'contact.form.email' | t }}</label>
+                        <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="Email"  autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" class="{% if form.errors contains 'email' %}input--error{% endif %}">
+                    </div>
+                </div>
+                        {%comment%}   
+                        <label for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
+                        <input type="tel" id="ContactFormPhone" name="contact[phone]" pattern="[0-9\-]*" value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+                        {%endcomment%}    
+                        <label for="ContactFormMessage">{{ 'contact.form.message' | t }}</label>
+                        <textarea rows="10" id="ContactFormMessage" placeholder="Please enter a detailed description of your request or issue." name="contact[body]">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+
+                        <input type="submit" class="btn  faq-contact-btn" value="{{ 'contact.form.submit' | t }}">
+
+                        {% endform %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script>
+            $(document).ready(function () {
+                $("#demo").on("hide.bs.collapse", function () {
+                    $(".btn").html('<span class="glyphicon glyphicon-collapse-down "></span> Open');
+                });
+                $("#demo").on("show.bs.collapse", function () {
+                    $(".btn").html('<span class="glyphicon glyphicon-collapse-up"></span> Close');
+                });
+            });
+        </script>

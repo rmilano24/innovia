@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="stories-page">
+    <div class="inner-stories-container">
+     
+      <div class="rte">
+        
+       
+        <div class="tab-contents" id="press" >
+             <div class="press-article-list row">
+              {% for article in blogs.press.articles %}
+               <div class="col-sm-4 col press-content">
+                 <div class="article-img-press text-center">	 
+                   <a href="{{ article.url }}"><img src="{{ article.image.src | img_url: 'master' }}"></a>
+                 </div>  
+                 <div class="article-img-press-article__date">
+                   <span class="article__date">
+                        {{ article.published_at | time_tag: format: 'month_day_year' }}
+                   </span>
+                 </div>
+                 <div class="article--press-title">
+                   <h1>{{ article.title }}</h1>
+                 </div>
+                  <div class="article-content-press">
+                    {{ article.content  | truncate: 400 }} <a class="read-more" href="{{ article.url }}">Read More <span><img src="{{'next-arrow.png' | asset_url}}" alt=""></span></a>
+                 </div>
+                 <div class="hr line"></div>
+               </div>
+              {% endfor %}
+               <div class="press text-center">
+               <p>For all press enquiries please contact us at</p>
+               <a href="mailto:press@innovianectar.com" target="_top">press@innovianectar.com</a>
+               </div>
+             </div>
+        </div>  
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">  
+  
+  $(document).on('click','.tab',function(){
+    $('.tab').removeClass('active');
+    $(this).addClass('active');
+    $('.tab-contents').css({display:'none'}); 
+    	var id=$(this).data('id'); 
+    	$('#'+id).css({display:'block'});       
+  });  
+  
+  $(document).ready(function(){  
+    size_li = $(".my-list .my-articles").size();     
+    x=6;
+    $('.my-list .my-articles:lt('+x+')').show();
+    $('#loadMore').click(function () {
+        x= (x+6 <= size_li) ? x+6 : size_li;
+        $('.my-list .my-articles:lt('+x+')').show();
+    });
+ });     
+  
+</script>
